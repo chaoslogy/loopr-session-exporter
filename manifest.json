@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Loopr Session Exporter",
   "short_name": "Loopr Exporter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Capture the active tab's cookies and localStorage as JSON, then paste into Loopr Studio to put a logged-in URL on a TV.",
   "minimum_chrome_version": "119",
   "icons": {
@@ -26,7 +26,7 @@
     "activeTab",
     "storage"
   ],
-  "optional_host_permissions": [
+  "host_permissions": [
     "https://*/*",
     "http://*/*"
   ]

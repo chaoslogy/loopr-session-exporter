@@ -119,7 +119,14 @@ async function capture(tab, url) {
   // parent domain (.youtube.com vs www.youtube.com). The `domain:` filter
   // only matches the literal host + its sub-domains, so it silently dropped
   // the session cookies for sites like youtube.com / notion.so / google.com.
-  const cookies = await chrome.cookies.getAll({ url: tab.url });
+  // Primary: cookies the URL would actually send (walks parent chain).
+  let cookies = await chrome.cookies.getAll({ url: tab.url });
+  // Belt-and-braces: if the URL filter returned nothing (edge case on certain
+  // first-load tabs or enterprise policy), retry on the apex domain.
+  if (cookies.length === 0) {
+    const apex = url.hostname.replace(/^www\./, '');
+    cookies = await chrome.cookies.getAll({ domain: apex });
+  }
   let localStorageData = {}, sessionStorageData = {};
   try {
     const results = await chrome.scripting.executeScript({
@@ -157,7 +164,7 @@ function renderResult(tab, url, payload) {
     ${siteCard(tab, url)}
     <div class="result ok">
       <h3>Captured ${escapeHtml(url.hostname)}</h3>
-      <p>One click sends it straight to Loopr Studio.</p>
+      <p>One click sends it straight to Loopr Studio. <span class="version-tag">v${VERSION}</span></p>
       <div class="stat-grid">
         <div class="stat"><div class="stat-num">${cookieCount}</div><div class="stat-label">cookies</div></div>
         <div class="stat"><div class="stat-num">${lsCount}</div><div class="stat-label">localStorage</div></div>
