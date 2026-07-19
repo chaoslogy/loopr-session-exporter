@@ -3,7 +3,7 @@
  * Captures cookies + localStorage + sessionStorage from the active tab and
  * delivers it to Loopr Studio in one click. Three flavours of hand-off:
  *
- *   1. Send to Loopr Studio (primary): opens app-staging.loopr.studio with
+ *   1. Send to Loopr Studio (primary): opens app.loopr.studio with
  *      the captured payload encoded in the URL hash. Loopr Studio reads the
  *      hash, opens its "Add from Extension" modal pre-filled, and the user
  *      just clicks Save & encrypt. No copy/paste anywhere.
