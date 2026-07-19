@@ -22,7 +22,7 @@ $version.textContent = `v${VERSION}`;
 
 // Where to deep-link the payload into. When we ship the prod build, this
 // hardcodes to https://app.loopr.studio (see manifest.prod.json).
-const STUDIO_URL = 'https://app-staging.loopr.studio/url-sessions';
+const STUDIO_URL = 'https://app.loopr.studio/url-sessions';
 const STUDIO_DEEP_LINK_BASE = STUDIO_URL + '#from-extension=';
 
 main();
